@@ -1,0 +1,48 @@
+.form {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 4rem;
+    width: 100%;
+
+    > div {
+        width: 100%;
+    }
+}
+
+.error {
+    color: tomato;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 0.5rem;
+}
+
+label {
+    display: block;
+    color: #666;
+    margin: 2rem 0 0.5rem;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 24px;
+    color: #666;
+}
+
+button {
+    margin: 2rem auto;
+    padding: 1rem;
+    font-size: 20px;
+    font-weight: normal;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    min-width: 150px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: lightgreen;
+        color: #333;
+    }
+}
