@@ -9,7 +9,7 @@ export default class FormSchema {
         validations: [],
     };
 
-    static validSchema = PropTypes.exact({
+    static validKeyShape = PropTypes.exact({
         displayName: PropTypes.string.isRequired,
         initialValue: PropTypes.any.isRequired,
         isRequired: PropTypes.bool.isRequired,
@@ -24,7 +24,7 @@ export default class FormSchema {
 
     static validateSchema(schema) {
         Object.keys(schema).forEach(key => {
-            const validShape = { [key]: FormSchema.validSchema };
+            const validShape = { [key]: FormSchema.validKeyShape };
             PropTypes.checkPropTypes(validShape, schema, 'key', 'FormSchema');
         });
     }

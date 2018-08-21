@@ -19,6 +19,8 @@ const withFormState = (Wrapped, schema) => {
     return class FormState extends Component {
         state = initialState;
 
+        // Public methods
+
         handleChange = ({ target }) => {
             const { name, value, checked } = target;
 
@@ -66,6 +68,12 @@ const withFormState = (Wrapped, schema) => {
             return this._isFormValid(newFormState);
         };
 
+        clearFormState = () => {
+            this.setState(initialState);
+        };
+
+        // Private internal methods
+
         _getValidatedFormState() {
             // validates the current form state, return s the updated state.
             return formKeys.reduce(
@@ -84,10 +92,6 @@ const withFormState = (Wrapped, schema) => {
 
             return isValid;
         }
-
-        clearFormState = () => {
-            this.setState(initialState);
-        };
 
         _setFormValue(name, value) {
             // merge with incoming with previous values
@@ -152,12 +156,12 @@ const withFormState = (Wrapped, schema) => {
 
             return (
                 <Wrapped
-                    handleChange={this.handleChange}
-                    handleBlur={this.handleBlur}
-                    validateForm={this.validateForm}
                     clearFormState={this.clearFormState}
-                    formState={this.state}
+                    handleBlur={this.handleBlur}
+                    handleChange={this.handleChange}
+                    validateForm={this.validateForm}
                     formSchema={formSchema}
+                    formState={this.state}
                     isFormValid={isFormValid}
                     {...this.props}
                 />
