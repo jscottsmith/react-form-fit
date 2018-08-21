@@ -3,8 +3,10 @@ import './styles.scss';
 import { storiesOf } from '@storybook/react';
 import { action, configureActions } from '@storybook/addon-actions';
 
-import Form from './components/Form';
+import { BasicForm, NoValidationForm } from './components/Form';
 
-storiesOf('Form', module).add('with basic inputs', () => (
-    <Form handleSubmit={action('form submit')} />
-));
+storiesOf('withFormState', module)
+    .add('with inputs and no validation', () => (
+        <NoValidationForm handleSubmit={action('form submit')} />
+    ))
+    .add('with basic validated inputs', () => <BasicForm handleSubmit={action('form submit')} />);

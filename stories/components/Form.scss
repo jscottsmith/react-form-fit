@@ -1,19 +1,25 @@
-$blue: #5baee5;
+$blue: #5ccded;
 $royal: #288de0;
 $red: #ff866b;
+$pure: #f9fafc;
 $white: #f2f4f7;
 $light: #c0c5ce;
 $gray: #888f99;
 $dark: #626972;
 $deep: #30343a;
+$blueshadow: 0 3px 10px rgba($royal, 0.2);
+$darkshadow: 0 3px 10px rgba($dark, 0.2);
 
 .form {
     display: flex;
     flex-flow: row wrap;
-    padding: 4rem;
+    padding: 2rem;
     margin: 0 auto;
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
+    background-color: $pure;
+    box-shadow: $darkshadow;
+    border-radius: 6px;
 
     > div {
         width: 100%;
@@ -21,6 +27,7 @@ $deep: #30343a;
 }
 
 .invalid {
+    color: $red;
     border-color: $red;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
@@ -74,36 +81,39 @@ input {
     &:focus {
         outline: none;
         border-color: $blue;
+        box-shadow: $blueshadow;
     }
 }
 
 button {
-    margin: 4rem auto;
+    margin: 4rem auto 1rem auto;
     padding: 0.7rem 1rem;
     font-size: 20px;
     font-weight: 300;
-    background-color: $royal;
+    background-color: $blue;
     color: $deep;
     border: none;
     min-width: 150px;
     border-radius: 4px;
     cursor: pointer;
-    box-shadow: 0 3px 15px rgba($dark, 0.5);
 
     &[disabled] {
         cursor: initial;
-        color: $light;
-        background-color: $gray;
+        color: $gray;
+        background-color: $light;
+        box-shadow: none;
         &:hover,
         &:focus {
-            color: $light;
-            background-color: $gray;
+            color: $gray;
+            background-color: $light;
+            box-shadow: none;
         }
     }
 
     &:hover,
     &:focus {
         outline: none;
-        background-color: $blue;
+        background-color: lighten($blue, 5%);
+        box-shadow: $blueshadow;
     }
 }

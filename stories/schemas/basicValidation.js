@@ -1,10 +1,4 @@
-// const isNumber = val => typeof val === 'number';
-// const isString = val => typeof val === 'string';
-const legnthGreaterThan = min => val => val.length > min;
-// const greaterThan = min => val => val > min;
-const greaterOrEqualThan = min => val => val >= min;
-const lessThan = min => val => val < min;
-// const lessOrEqualThan = max => val => val <= max;
+import { lengthGreaterThan, greaterOrEqualThan, lessThan } from '../validations';
 
 // NOTE:
 // This is the config that describes our form state
@@ -20,7 +14,7 @@ const formSchema = {
         // isRequired: false,
         validations: [
             {
-                test: legnthGreaterThan(2),
+                test: lengthGreaterThan(2),
                 error: "You sure that's your full name?",
             },
         ],

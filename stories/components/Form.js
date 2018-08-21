@@ -2,20 +2,39 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextInput from './TextInput';
 import NumberInput from './NumberInput';
-import basicFormSchema from '../schemas/formSchema';
 import withFormState from '../../src/withFormState';
+
+// schemas
+import basicValidation from '../schemas/basicValidation';
+import noValidation from '../schemas/noValidation';
 
 import './Form.scss';
 
 class Form extends Component {
     static propTypes = {
-        handleChange: PropTypes.func.isRequired,
-        handleBlur: PropTypes.func.isRequired,
-        validateForm: PropTypes.func.isRequired,
         clearFormState: PropTypes.func.isRequired,
-        formState: PropTypes.object.isRequired,
         formSchema: PropTypes.object.isRequired,
+        formState: PropTypes.object.isRequired,
+        handleBlur: PropTypes.func.isRequired,
+        handleChange: PropTypes.func.isRequired,
+        handleSubmit: PropTypes.func.isRequired,
+        injectFormState: PropTypes.func.isRequired,
         isFormValid: PropTypes.bool.isRequired,
+        validateForm: PropTypes.func.isRequired,
+    };
+
+    componentDidMount = () => {
+        // NOTE: this is simulating an API call that might return
+        // data needed as initial form state.
+        // setTimeout(this.updateFormState, 1000);
+    };
+
+    updateFormState = () => {
+        // State to be injected after the timeout
+        this.props.injectFormState({
+            name: 'J Scott Smith',
+            age: 32,
+        });
     };
 
     handleSubmit = () => {
@@ -27,6 +46,7 @@ class Form extends Component {
     };
 
     render() {
+        // with form state HOC props
         const { handleChange, handleBlur, formState, formSchema, isFormValid } = this.props;
 
         return (
@@ -57,4 +77,8 @@ class Form extends Component {
     }
 }
 
-export default withFormState(Form, basicFormSchema);
+// exporting withFormState(wrapped, schema)
+// Passes the <Form> as the wrapped component and a schema to validate the form against
+export const BasicForm = withFormState(Form, basicValidation);
+
+export const NoValidationForm = withFormState(Form, noValidation);
