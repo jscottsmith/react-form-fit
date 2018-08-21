@@ -92,6 +92,16 @@ const withFormState = (Wrapped, schema) => {
             );
         }
 
+        _getFormValues() {
+            return formKeys.reduce(
+                (acc, name) => ({
+                    ...acc,
+                    [name]: this.state[name].value,
+                }),
+                {}
+            );
+        }
+
         _isFormValid(state) {
             const validations = formKeys.map(name => state[name].isInvalid);
 
@@ -160,6 +170,7 @@ const withFormState = (Wrapped, schema) => {
 
         render() {
             const isFormValid = this._isFormValid(this._getValidatedFormState());
+            const formValues = this._getFormValues();
 
             return (
                 <Wrapped
@@ -170,6 +181,7 @@ const withFormState = (Wrapped, schema) => {
                     validateForm={this.validateForm}
                     formSchema={formSchema}
                     formState={this.state}
+                    formValues={formValues}
                     isFormValid={isFormValid}
                     {...this.props}
                 />
