@@ -4,13 +4,16 @@ import PropTypes from 'prop-types';
 const Input = ({ label, isInvalid, errors, ...rest }) => (
     <div>
         <label>{label}</label>
-        {isInvalid &&
-            errors.map((err, i) => (
-                <div key={`${i}-error`} className="error">
-                    {err}
+        <div className="input-container">
+            {isInvalid && (
+                <div className="error">
+                    {errors.map((err, i) => (
+                        <span key={`${i}-error`}>{err}</span>
+                    ))}
                 </div>
-            ))}
-        <input {...rest} />
+            )}
+            <input {...rest} className={isInvalid ? 'invalid' : ''} />
+        </div>
     </div>
 );
 
