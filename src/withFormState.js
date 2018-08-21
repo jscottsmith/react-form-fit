@@ -73,6 +73,7 @@ const withFormState = (Wrapped, schema) => {
         };
 
         injectFormState = injectedState => {
+            // @TODO: throw if key doesn't exist in form schema
             Object.keys(injectedState).forEach(key => {
                 const value = injectedState[key];
                 this._setFormValue(key, { value });
