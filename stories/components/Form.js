@@ -15,6 +15,7 @@ class Form extends Component {
         clearFormState: PropTypes.func.isRequired,
         formSchema: PropTypes.object.isRequired,
         formState: PropTypes.object.isRequired,
+        formValues: PropTypes.object.isRequired,
         handleBlur: PropTypes.func.isRequired,
         handleChange: PropTypes.func.isRequired,
         handleSubmit: PropTypes.func.isRequired,
@@ -39,9 +40,9 @@ class Form extends Component {
 
     handleSubmit = () => {
         if (this.props.validateForm()) {
-            this.props.handleSubmit('VALID FORM', this.props.formState);
+            this.props.handleSubmit('VALID FORM', this.props.formValues);
         } else {
-            this.props.handleSubmit('INVALID FORM', this.props.formState);
+            this.props.handleSubmit('INVALID FORM', this.props.formValues);
         }
     };
 
