@@ -72,10 +72,17 @@ const withFormState = (Wrapped, schema) => {
             this.setState(initialState);
         };
 
+        injectFormState = injectedState => {
+            Object.keys(injectedState).forEach(key => {
+                const value = injectedState[key];
+                this._setFormValue(key, { value });
+            });
+        };
+
         // Private internal methods
 
         _getValidatedFormState() {
-            // validates the current form state, return s the updated state.
+            // validates the current form state, returns the updated state.
             return formKeys.reduce(
                 (acc, name) => ({
                     ...acc,
@@ -159,6 +166,7 @@ const withFormState = (Wrapped, schema) => {
                     clearFormState={this.clearFormState}
                     handleBlur={this.handleBlur}
                     handleChange={this.handleChange}
+                    injectFormState={this.injectFormState}
                     validateForm={this.validateForm}
                     formSchema={formSchema}
                     formState={this.state}
