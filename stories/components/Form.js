@@ -20,14 +20,14 @@ class Form extends Component {
 
     handleSubmit = () => {
         if (this.props.validateForm()) {
-            console.log(this.props.formState);
+            this.props.handleSubmit('VALID FORM', this.props.formState);
         } else {
-            console.log('invalid form');
+            this.props.handleSubmit('INVALID FORM', this.props.formState);
         }
     };
 
     render() {
-        const { handleChange, handleBlur, formState, formSchema } = this.props;
+        const { handleChange, handleBlur, formState, formSchema, isFormValid } = this.props;
 
         return (
             <div className="form">
@@ -49,7 +49,9 @@ class Form extends Component {
                     errors={formState.age.errors}
                     isInvalid={formState.age.isInvalid}
                 />
-                <button onClick={this.handleSubmit}>Submit</button>
+                <button disabled={!isFormValid} onClick={this.handleSubmit}>
+                    Submit
+                </button>
             </div>
         );
     }
