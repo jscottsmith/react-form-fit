@@ -1,15 +1,20 @@
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // creates and validates a form schema for use with the withFormState HOC
 
-export default class FormSchema {
-    static defaultValues = {
+export default class FormSchema extends Component {
+    static propTypes = {
+        schema: PropTypes.object.isRequired,
+    };
+
+    defaultValues = {
         initialValue: '',
         isRequired: true,
         validations: [],
     };
 
-    static validKeyShape = PropTypes.exact({
+    validKeyShape = PropTypes.exact({
         displayName: PropTypes.string.isRequired,
         initialValue: PropTypes.any.isRequired,
         isRequired: PropTypes.bool.isRequired,
@@ -22,14 +27,14 @@ export default class FormSchema {
         ),
     });
 
-    static validateSchema(schema) {
+    _validateSchema(schema) {
         Object.keys(schema).forEach(key => {
-            const validShape = { [key]: FormSchema.validKeyShape };
+            const validShape = { [key]: this.validKeyShape };
             PropTypes.checkPropTypes(validShape, schema, 'key', 'FormSchema');
         });
     }
 
-    static mergeDefaults(schema) {
+    _getMergedDefaults(schema) {
         const merged = Object.keys(schema).reduce((acc, key) => {
             acc[key] = {
                 name: key,
@@ -41,9 +46,14 @@ export default class FormSchema {
         return merged;
     }
 
-    static create(schema) {
-        const merged = this.mergeDefaults(schema);
-        this.validateSchema(merged);
+    _create(schema) {
+        const merged = this._getMergedDefaults(schema);
+        this._validateSchema(merged);
         return merged;
+    }
+
+    render() {
+        const { schema, children } = this.props;
+        return children(this._create(schema));
     }
 }
