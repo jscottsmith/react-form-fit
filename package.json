@@ -6,18 +6,25 @@
     "scripts": {
         "start": "npm run storybook",
         "lint": "eslint src/**",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest",
+        "test:watch": "jest --watch",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook",
         "prettier": "prettier \"*/**/*.{js,jsx,json,css,scss}\" --ignore-path ./.prettierignore --write"
     },
     "keywords": [],
     "jest": {
+        "setupFiles": [
+            "<rootDir>/tests/jestSetup.js"
+        ],
+        "snapshotSerializers": [
+            "enzyme-to-json/serializer"
+        ],
         "modulePaths": [
             "<rootDir>/src/"
         ],
         "coverageDirectory": "./coverage/",
-        "collectCoverage": true
+        "collectCoverage": false
     },
     "dependencies": {
         "prop-types": "^15.5.10"
@@ -37,6 +44,9 @@
         "babel-preset-stage-0": "^6.24.1",
         "babel-runtime": "^6.26.0",
         "css-loader": "^1.0.0",
+        "enzyme": "^3.4.4",
+        "enzyme-adapter-react-16": "^1.2.0",
+        "enzyme-to-json": "^3.3.4",
         "eslint": "^5.4.0",
         "eslint-plugin-babel": "^5.1.0",
         "eslint-plugin-react": "^7.11.1",

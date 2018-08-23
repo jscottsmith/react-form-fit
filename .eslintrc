@@ -1,12 +1,13 @@
 {
-    "globals": {
-        "test": true,
-        "expect": true
-    },
     "env": {
         "es6": true,
         "browser": true,
-        "node": true
+        "node": true,
+        "jest": true
+    },
+    "globals": {
+        "mount": true,
+        "shallow": true
     },
     "parser": "babel-eslint",
     "plugins": ["babel", "react"],
