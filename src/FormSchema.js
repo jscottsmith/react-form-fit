@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 export default class FormSchema extends Component {
     static propTypes = {
         schema: PropTypes.object.isRequired,
+        children: PropTypes.func.isRequired,
     };
 
     defaultValues = {
@@ -26,6 +27,10 @@ export default class FormSchema extends Component {
             })
         ),
     });
+
+    get schemaKeys() {
+        return Object.keys(this.props.schema);
+    }
 
     _validateSchema(schema) {
         Object.keys(schema).forEach(key => {
@@ -54,6 +59,6 @@ export default class FormSchema extends Component {
 
     render() {
         const { schema, children } = this.props;
-        return children(this._create(schema));
+        return children(this._create(schema), this.schemaKeys);
     }
 }

@@ -4,9 +4,9 @@ import { storiesOf } from '@storybook/react';
 import { action, configureActions } from '@storybook/addon-actions';
 
 import { BasicForm, NoValidationForm } from './components/Form';
+import DynamicFormContainer from './components/DynamicFormContainer';
 
 storiesOf('withFormState', module)
-    .add('with inputs and no validation', () => (
-        <NoValidationForm handleSubmit={action('form submit')} />
-    ))
-    .add('with basic validated inputs', () => <BasicForm handleSubmit={action('form submit')} />);
+    .add('no validation', () => <NoValidationForm handleSubmit={action('form submit')} />)
+    .add('validated inputs', () => <BasicForm handleSubmit={action('form submit')} />)
+    .add('dynamic schema', () => <DynamicFormContainer handleSubmit={action('form submit')} />);

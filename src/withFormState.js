@@ -5,8 +5,8 @@ import FormSchema from './FormSchema';
 const withFormState = (Wrapped, schemaConfig) => {
     const FormStateWrapper = wrapperProps => (
         <FormSchema schema={schemaConfig}>
-            {schema => (
-                <FormInternalState schema={schema}>
+            {(schema, formKeys) => (
+                <FormInternalState schema={schema} formKeys={formKeys}>
                     {props => <Wrapped {...props} {...wrapperProps} />}
                 </FormInternalState>
             )}

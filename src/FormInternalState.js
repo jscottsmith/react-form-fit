@@ -3,14 +3,66 @@ import PropTypes from 'prop-types';
 
 const notEmpty = val => !!val;
 
+function arraysEqual(a, b) {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length != b.length) return false;
+
+    const aCopy = [...a].sort();
+    const bCopy = [...b].sort();
+
+    for (let i = 0; i < aCopy.length; ++i) {
+        if (aCopy[i] !== bCopy[i]) return false;
+    }
+    return true;
+}
+
+function arrayDiff(a, b) {
+    return a.filter(x => !b.includes(x));
+}
+
 class FormInternalState extends Component {
     static propTypes = {
+        formKeys: PropTypes.array.isRequired,
         schema: PropTypes.object.isRequired,
     };
 
     constructor(props) {
         super(props);
-        this.state = this.initialState;
+        this.state = {
+            ...this.initialState,
+            __FORM_KEYS__: props.formKeys, // <- save to compare when schema updates so we can update state.
+        };
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        const newKeys = props.formKeys;
+        const oldKeys = state.__FORM_KEYS__;
+
+        if (!arraysEqual(newKeys, oldKeys)) {
+            // update form keys in state
+            const initialState = { __FORM_KEYS__: newKeys };
+
+            // added new key
+            if (newKeys.length > oldKeys.length) {
+                const addedKeys = arrayDiff(newKeys, oldKeys);
+                const nextState = addedKeys.reduce((a, c) => {
+                    a[c] = { value: props.schema[c].initialValue }; // newly added key
+                    return a;
+                }, initialState);
+                return nextState;
+            }
+
+            // removed keys
+            const removedKeys = arrayDiff(oldKeys, newKeys);
+            const nextState = removedKeys.reduce((a, c) => {
+                a[c] = undefined; // <- removes the key from state
+                return a;
+            }, initialState);
+            return nextState;
+        }
+
+        return null;
     }
 
     get formKeys() {
@@ -186,6 +238,7 @@ class FormInternalState extends Component {
             validateForm: this.validateForm,
             formSchema: this.props.schema,
             formState: this.state,
+            formKeys: this.formKeys,
             formValues,
             isFormValid,
         });
