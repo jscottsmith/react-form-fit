@@ -1,6 +1,8 @@
-# React FormState
+# React Form Fit [![Build Status](https://travis-ci.org/jscottsmith/react-form-fit.svg?branch=master)](https://travis-ci.org/jscottsmith/react-form-fit)
 
-👔 Straight to business form state handling with validations for React.
+👔 Form-fitting and straight to business state handling with validation for React form inputs.
+
+Try it on for size: [Storybook](http://react-form-fit.surge.sh/)
 
 ## Getting Started (Basic 👌🏻)
 
