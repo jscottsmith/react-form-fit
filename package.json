@@ -9,7 +9,7 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook",
+        "storybook:export": "build-storybook -c .storybook -o build",
         "prettier": "prettier \"*/**/*.{js,jsx,json,css,scss}\" --ignore-path ./.prettierignore --write"
     },
     "keywords": [],

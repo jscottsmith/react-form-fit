@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+    - '7'
+cache:
+    directories:
+        - 'node_modules'
+script: yarn test && yarn storybook:export
+deploy:
+    skip-cleanup: true
+    provider: surge
+    project: build
+    domain: react-form-fit.surge.sh
+    on: master
