@@ -35,6 +35,10 @@ const formSchema = {
             },
         ],
     },
+
+    toc: {
+        displayName: 'Agree to Terms',
+    },
 };
 
 export default formSchema;

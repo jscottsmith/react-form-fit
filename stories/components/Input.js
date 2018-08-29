@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Input = ({ label, isInvalid, errors, ...rest }) => (
-    <div>
-        <label>{label}</label>
+const Input = ({ type, label, isInvalid, errors, ...rest }) => (
+    <div className={`input-${type}`}>
+        {label && <label>{label}</label>}
         <div className="input-container">
             {isInvalid && (
                 <div className="error">
@@ -12,14 +12,19 @@ const Input = ({ label, isInvalid, errors, ...rest }) => (
                     ))}
                 </div>
             )}
-            <input {...rest} className={isInvalid ? 'invalid' : ''} />
+            <input {...rest} type={type} className={isInvalid ? 'invalid' : ''} />
         </div>
     </div>
 );
 
+Input.defaultProps = {
+    type: 'input',
+};
+
 Input.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string,
+    type: PropTypes.string.isRequired,
     isInvalid: PropTypes.bool,
     errors: PropTypes.array,
 };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextInput from './TextInput';
 import NumberInput from './NumberInput';
+import CheckboxInput from './CheckboxInput';
 import withFormState from '../../src/withFormState';
 
 // schemas
@@ -69,6 +70,15 @@ class Form extends Component {
                     value={formState.age.value}
                     errors={formState.age.errors}
                     isInvalid={formState.age.isInvalid}
+                />
+                <CheckboxInput
+                    name="toc"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    label={formSchema.toc.displayName}
+                    checked={formState.toc.value}
+                    errors={formState.toc.errors}
+                    isInvalid={formState.toc.isInvalid}
                 />
                 <button disabled={!isFormValid} onClick={this.handleSubmit}>
                     Submit

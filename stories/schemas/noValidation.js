@@ -12,6 +12,11 @@ const formSchema = {
         displayName: 'Age',
         isRequired: false,
     },
+
+    toc: {
+        displayName: 'Agree to Terms',
+        isRequired: false,
+    },
 };
 
 export default formSchema;
