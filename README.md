@@ -2,7 +2,7 @@
 
 👔 Form-fitting and straight to business state handling with validation for React form inputs.
 
-Try it on for size: [Storybook](http://react-form-fit.surge.sh/)
+Try it on for size: [Storybook](https://react-form-fit.surge.sh/)
 
 ## Getting Started (Basic 👌🏻)
 
