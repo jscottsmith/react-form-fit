@@ -47,9 +47,24 @@ class Form extends Component {
         }
     };
 
+    handleDefaults = () => {
+        this.props.injectFormState({
+            name: 'John Doe',
+            age: 21,
+            toc: true,
+        });
+    };
+
     render() {
         // with form state HOC props
-        const { handleChange, handleBlur, formState, formSchema, isFormValid } = this.props;
+        const {
+            handleChange,
+            handleBlur,
+            formState,
+            formSchema,
+            isFormValid,
+            hasInject,
+        } = this.props;
 
         return (
             <div className="form">
@@ -80,9 +95,11 @@ class Form extends Component {
                     errors={formState.toc.errors}
                     isInvalid={formState.toc.isInvalid}
                 />
+
                 <button disabled={!isFormValid} onClick={this.handleSubmit}>
                     Submit
                 </button>
+                {hasInject && <button onClick={this.handleDefaults}>Set Defaults</button>}
             </div>
         );
     }
@@ -93,3 +110,5 @@ class Form extends Component {
 export const BasicForm = withFormState(Form, basicValidation);
 
 export const NoValidationForm = withFormState(Form, noValidation);
+
+export const InjectForm = withFormState(Form, basicValidation);

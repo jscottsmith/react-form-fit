@@ -1,16 +1,12 @@
 import React from 'react';
 import FormInternalState from './FormInternalState';
-import FormSchema from './FormSchema';
+import { createSchema } from './createSchema';
 
-const withFormState = (Wrapped, schemaConfig) => {
+const withFormState = (Wrapped, schema) => {
     const FormStateWrapper = wrapperProps => (
-        <FormSchema schema={schemaConfig}>
-            {(schema, formKeys) => (
-                <FormInternalState schema={schema} formKeys={formKeys}>
-                    {props => <Wrapped {...props} {...wrapperProps} />}
-                </FormInternalState>
-            )}
-        </FormSchema>
+        <FormInternalState schema={createSchema(schema)} formKeys={Object.keys(schema)}>
+            {props => <Wrapped {...props} {...wrapperProps} />}
+        </FormInternalState>
     );
     return FormStateWrapper;
 };

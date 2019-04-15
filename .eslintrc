@@ -10,7 +10,7 @@
         "shallow": true
     },
     "parser": "babel-eslint",
-    "plugins": ["babel", "react"],
+    "plugins": ["babel", "react", "react-hooks"],
     "rules": {
         /* Possible Errors */
         "comma-dangle": [1, "always-multiline"],
@@ -209,6 +209,9 @@
         "react/self-closing-comp": 1,
         "react/sort-comp": 1,
         "react/sort-prop-types": 1,
-        "react/wrap-multilines": 0
+        "react/wrap-multilines": 0,
+
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     }
 }

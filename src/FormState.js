@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormInternalState from './FormInternalState';
-import FormSchema from './FormSchema';
+import { createSchema } from './createSchema';
 
-const FormState = ({ schema, children }) => (
-    <FormSchema schema={schema}>
-        {(_schema, formKeys) => (
-            <FormInternalState schema={_schema} formKeys={formKeys}>
-                {props => children(props)}
-            </FormInternalState>
-        )}
-    </FormSchema>
-);
+const FormState = ({ schema, children }) => {
+    return (
+        <FormInternalState schema={createSchema(schema)} formKeys={Object.keys(schema)}>
+            {props => children(props)}
+        </FormInternalState>
+    );
+};
 
 FormState.propTypes = {
     children: PropTypes.func.isRequired,
